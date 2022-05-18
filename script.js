@@ -64,7 +64,7 @@ const generateBooks = async (filteredData = []) => {
         const image = document.createElement("img");
         image.style.height = '100%';
         image.style.width = '100%';
-        image.setAttribute("src", "./assets/book_image.jpeg");
+        image.setAttribute("src", "./book_image.jpeg");
         const bookDesc = document.createElement("div");
         bookDesc.setAttribute("class", "book-desc-wrapper");
         // Book details
