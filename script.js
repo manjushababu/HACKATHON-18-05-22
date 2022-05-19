@@ -107,7 +107,7 @@ const generateBooks = async (filteredData = [], error='') => {
             authors.appendChild(list);
         });
         const charactersText = document.createElement("div");
-        charactersText.innerHTML = "<b>Characters</b>"
+        charactersText.innerHTML = "<b>Characters</b>";
         charactersText.style.margin = "10px 0";
         charactersText.style.textAlign = "left";
         const characters = document.createElement("ol");
@@ -118,6 +118,11 @@ const generateBooks = async (filteredData = [], error='') => {
             list.innerHTML = element;
             characters.appendChild(list);
         });
+        if (slicedArr.length === 0) {
+            charactersText.innerHTML = "<b>Characters currently unavailable</b>";
+            charactersText.style.textAlign = "center";
+            charactersText.style.margin = "10px 0";
+        }
         bookDeatilsValue.append(isbn, noOfPages, publisher, released, authors);
         bookDeatils.append(bookDeatilsHeading, bookDeatilsValue);
         bookDesc.append(bookName, bookDeatils, charactersText, characters);
