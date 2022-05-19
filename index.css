@@ -75,3 +75,12 @@ main {
 .book-details-value ul {
     margin: 0;
 }
+
+.error {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 25px;
+    position: absolute;
+    left: 45%;
+    right: 45%;
+}
