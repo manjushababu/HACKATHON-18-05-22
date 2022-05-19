@@ -25,18 +25,15 @@ const fetchBooks = async () => {
     const response = await fetch(`https://anapioficeandfire.com/api/books?page=1&pageSize=${size}`);
     const data = await response.json();
     const booksData = data;
-    console.log('data ', booksData)
     return booksData;
 }
 
 async function filterBooks (event) {
     const data = await fetchBooks();
-    console.log('value ', event.target.value);
     let filteredData = [];
     if (event.target.value) {
         filteredData = data?.filter(val => val.name.toLowerCase().includes(event.target.value.toLowerCase()))
     }
-    console.log(filteredData);
     generateBooks(filteredData);
 }
 
@@ -47,7 +44,6 @@ container.setAttribute("class", "container");
 
 const generateBooks = async (filteredData = []) => {
     let data = [];
-    console.log('filteredData ', filteredData);
     if (filteredData.length > 0) {
         data = [...filteredData];
         container.innerHTML = "";
@@ -96,16 +92,9 @@ const generateBooks = async (filteredData = []) => {
         charactersText.style.margin = "10px 0";
         charactersText.style.textAlign = "left";
         const characters = document.createElement("ol");
-        // const dummy = data[i].characters.map((val, index) => {
-        //     if (index < 5) {
-        //         return fetchCharaters(val).then(data => data);
-        //     }
-        // });
         const size = data[i].characters.slice(0, 5);
         const slicedArr =  await fetchCharaters(size);
-        console.log('slicedArr ', slicedArr);
         slicedArr?.forEach(element => {
-            console.log('forEach ', element);
             const list = document.createElement("li");
             list.innerHTML = element;
             characters.appendChild(list);
@@ -123,11 +112,9 @@ generateBooks();
 async function fetchCharaters (charactersData) {
     const characters = [...charactersData];
     const charArr = [];
-    console.log('data length ', characters.length, characters);
     for(let i = 0; i<characters.length; i++) {
         const response = await fetch(characters[i]);
         const data = await response.json();
-        console.log('data ', i, data);
         if (data.name) {
             charArr.push(data.name);
         }
