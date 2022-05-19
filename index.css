@@ -44,8 +44,8 @@ main {
 }
 
 .book-desc-wrapper {
-    color: rgb(96, 96, 96);
-    background-color: rgb(248, 248, 248);
+    color: #707070;
+    background-color: #f7f7f7;
     padding: 20px 25px;
     text-align: center;
 }
