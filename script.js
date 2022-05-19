@@ -5,7 +5,7 @@ bannerImage.setAttribute("class", "banner");
 // Search component
 let searchInput = document.createElement("input");
 searchInput.setAttribute("type", "text");
-searchInput.setAttribute("placeholder", "Search...")
+searchInput.setAttribute("placeholder", "Please type and press enter to fetch the results your looking for...")
 searchInput.setAttribute("name", "search");
 searchInput.setAttribute("class", "searchInput");
 searchInput.addEventListener("change", filterBooks);
@@ -34,7 +34,18 @@ async function filterBooks (event) {
     if (event.target.value) {
         filteredData = data?.filter(val => val.name.toLowerCase().includes(event.target.value.toLowerCase()))
     }
-    generateBooks(filteredData);
+    if (event.target.value) {
+        if (filteredData.length > 0) {
+            generateBooks(filteredData);
+        } else {
+            console.log('error');
+            generateBooks(filteredData, 'No results found!');
+        }
+    } else {
+        generateBooks(filteredData);
+    }
+    
+    
 }
 
 // Creating book wrapper
@@ -42,8 +53,16 @@ const container = document.createElement("container");
 container.setAttribute("class", "container");
 
 
-const generateBooks = async (filteredData = []) => {
+const generateBooks = async (filteredData = [], error='') => {
     let data = [];
+
+    if (error) {
+        const errorWrapper = document.createElement("div");
+        errorWrapper.setAttribute("class", "error");
+        errorWrapper.innerHTML = error;
+        container.innerHTML = "";
+        container.appendChild(errorWrapper);
+    } else {
     if (filteredData.length > 0) {
         data = [...filteredData];
         container.innerHTML = "";
@@ -106,6 +125,7 @@ const generateBooks = async (filteredData = []) => {
         bookImage.appendChild(image);
         container.appendChild(book);
     }
+}
 }
 generateBooks();
 
